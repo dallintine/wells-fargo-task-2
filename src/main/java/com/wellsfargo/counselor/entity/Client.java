@@ -32,19 +32,26 @@ public class Client {
 
     @Column(nullable = false)
     private String email;
+    
+    @ManyToOne
+	private Advisor advisor;
+
+	
 
     protected Client() {
 
     }
 
-    @ManyToOne
-    @JoinColumn(name = "advisorId")
-    private Advisor advisor;
+//    @ManyToOne
+//    @JoinColumn(name = "advisorId")
+//    private Advisor advisor;
+//
+//    @OneToMany(mappedBy = "client")
+//    private List<Portfolio> portfolios;
 
-    @OneToMany(mappedBy = "client")
-    private List<Portfolio> portfolios;
-
-    public Client(String firstName, String lastName, String address, String phone, String email) {
+    public Client(Advisor advisor, String firstName, String lastName, String address, String phone, String email) {
+    	
+    	this.advisor = advisor;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -54,6 +61,14 @@ public class Client {
 
     public Long getclientId() {
         return clientId;
+    }
+    
+    public Advisor getAdvisor() {
+        return advisor;
+    }
+
+    public void setAdvisor(Advisor advisor) {
+        this.advisor = advisor;
     }
 
     public String getFirstName() {

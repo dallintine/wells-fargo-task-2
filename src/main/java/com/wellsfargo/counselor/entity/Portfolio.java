@@ -17,29 +17,42 @@ public class Portfolio {
     @Id
     @GeneratedValue()
     private long portfolioId;
+    
+    @ManyToOne
+    private Client client;
+
 
     @Column(nullable = false)
-    private Date creationDate;
+    private String creationDate;
 
     protected Portfolio() {
 
     }
 
-    @ManyToOne
-    private Client client;
+   
+//    @OneToMany(mappedBy = "portfolio")
+//    private List<Security> securities;
 
-    @OneToMany(mappedBy = "portfolio")
-    private List<Security> securities;
-
-    public Portfolio(Date creationDate) {
+    public Portfolio(Client client, String creationDate) {
+    	this.client = client;
         this.creationDate = creationDate;
 
     }
-    public Date getCreationDate() {
+    
+    public long getportfolioId() {
+    	return portfolioId;
+    	
+    }
+    
+    public Client getclient() {
+    	return client; 
+    }
+    
+    public String  getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(String creationDate) {
         this.creationDate = creationDate;
     }
 }
